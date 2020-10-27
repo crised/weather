@@ -23,14 +23,25 @@ app.use(express.static('website'));
 const port = 3000;
 
 const server = app.listen(port, listening);
-function listening(){
-    console.log(server);
+
+function listening() {
+    // console.log(server);
     console.log(`running on localhost: ${port}`);
 };
 
+app.get('/proj', function (req, res) {
+    res.send(projectData);
+});
+
+let id = 0;
+app.post('/proj', function (req, res) {
+    const data = req.body;
+    console.log(data);
+    // const obj = {temperature: data.temperature,
+    //     date: date,
+    //     userResponse: userResponse};
+    // projectData[++id] = obj;
+});
 
 
 // Setup Server
-const openWeatherApiKey = 'f1ee58157d6ebd35f1924b75f633d249';
-const cityName = 'Miami';
-const url = `api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${openWeatherApiKey}`;
