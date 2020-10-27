@@ -12,7 +12,7 @@ let d = new Date();
 let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
 
 const getWeather = async (zip, key) => {
-    if (zip.length != 5) {
+    if (zip === undefined || zip.length != 5) {
         console.log('Bad zip');
         return;
     }
@@ -46,11 +46,14 @@ const postWeatherData = async (temperature, date, userResponse) => {
 const promiseChain = function () {
     getWeather(zipInput.value, openWeatherApiKey)
         .then((data) => {
-            return postWeatherData(data.main.temp, newDate, feelings.value);
+            if (data) return postWeatherData(data.main.temp, newDate, feelings.value);
         }).then((data) => {
-        dateDiv.innerText = data.date;
-        tempDiv.innerText = data.temperature;
-        contentDiv.innerText = data.userResponse;
+        if (data) {
+            dateDiv.innerText = data.date;
+            tempDiv.innerText = data.temperature;
+            contentDiv.innerText = data.userResponse;
+        }
+
     });
 }
 
