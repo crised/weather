@@ -44,11 +44,10 @@ const promiseChain = function () {
     console.log('here');
     getWeather(zipInput.value, openWeatherApiKey)
         .then((data) => {
-            return postWeatherData(data.main.temp, newDate, 'UserResponse!');
+            return postWeatherData(data.main.temp, newDate, feelings.value);
         }).then((data) => {
         console.log(data);
     });
-
 }
 
 // Event listeners
