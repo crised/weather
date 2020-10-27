@@ -3,6 +3,9 @@ const openWeatherApiKey = 'f1ee58157d6ebd35f1924b75f633d249';
 const generateButton = document.getElementById('generate');
 const feelings = document.getElementById('feelings');
 const zipInput = document.getElementById('zip');
+const dateDiv = document.getElementById('date');
+const tempDiv = document.getElementById('temp');
+const contentDiv = document.getElementById('content');
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -34,19 +37,20 @@ const postWeatherData = async (temperature, date, userResponse) => {
     const response = await fetch('proj', body);
     try {
         const newData = await response.json();
-        console.log(newData);
+        return newData;
     } catch (error) {
         console.log('error', error);
     }
 };
 
 const promiseChain = function () {
-    console.log('here');
     getWeather(zipInput.value, openWeatherApiKey)
         .then((data) => {
             return postWeatherData(data.main.temp, newDate, feelings.value);
         }).then((data) => {
-        console.log(data);
+        dateDiv.innerText = data.date;
+        tempDiv.innerText = data.temperature;
+        contentDiv.innerText = data.userResponse;
     });
 }
 

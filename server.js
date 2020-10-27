@@ -36,9 +36,8 @@ app.get('/proj', function (req, res) {
 let id = 0;
 app.post('/proj', function (req, res) {
     const data = req.body;
-    console.log(data);
     projectData[++id] = data;
-    res.send(projectData);
+    res.send(projectData[id]);
 });
 
 
