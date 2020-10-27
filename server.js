@@ -37,10 +37,8 @@ let id = 0;
 app.post('/proj', function (req, res) {
     const data = req.body;
     console.log(data);
-    // const obj = {temperature: data.temperature,
-    //     date: date,
-    //     userResponse: userResponse};
-    // projectData[++id] = obj;
+    projectData[++id] = data;
+    res.send(projectData);
 });
 
 
